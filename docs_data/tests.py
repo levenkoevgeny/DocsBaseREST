@@ -12,6 +12,7 @@ class UserFactory(django.DjangoModelFactory):
     subdivision_name = Faker('name', locale='ru_RU')
 
 
+
 class SubdivisionTests(APITestCase):
     def test_create_subdivision(self):
         for _ in range(100):
