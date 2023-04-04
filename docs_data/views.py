@@ -21,6 +21,7 @@ class CustomUserViewSet(viewsets.ModelViewSet):
 class SubdivisionViewSet(viewsets.ModelViewSet):
     queryset = Subdivision.objects.all()
     serializer_class = SubdivisionSerializer
+    filterset_fields = {'subdivision_name': ['icontains']}
     # permission_classes = [permissions.IsAuthenticated]
 
 
