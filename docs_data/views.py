@@ -46,7 +46,7 @@ def get_me(request):
     except jwt.JWTError:
         return Response(status=status.HTTP_403_FORBIDDEN)
     try:
-        user_data = CustomUser.objects.get(user_id=payload['user_id'])
+        user_data = CustomUser.objects.get(pk=payload['user_id'])
         serializer = CustomUserSerializer(user_data)
         return Response(serializer.data)
     except CustomUser.DoesNotExist:
