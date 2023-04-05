@@ -4,6 +4,11 @@ from django.contrib.auth.models import AbstractUser
 
 class Subdivision(models.Model):
     subdivision_name = models.TextField(verbose_name="Название подразделения")
+    date_time_created = models.DateTimeField(verbose_name="Дата и время создания", auto_now_add=True, blank=True, null=True)
+
+    @property
+    def get_users_count(self):
+        return self.customuser_set.all().count()
 
     def __str__(self):
         return self.subdivision_name

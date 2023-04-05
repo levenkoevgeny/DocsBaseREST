@@ -23,16 +23,18 @@ class CustomUserSerializer(serializers.ModelSerializer):
 class SubdivisionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Subdivision
-        fields = '__all__'
+        fields = ['subdivision_name', 'date_time_created', 'get_users_count']
 
 
 class CategoryItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = CategoryItem
         fields = '__all__'
+        depth = 1
 
 
 class DocDataSerializer(serializers.ModelSerializer):
     class Meta:
         model = DocData
         fields = '__all__'
+        depth = 1
