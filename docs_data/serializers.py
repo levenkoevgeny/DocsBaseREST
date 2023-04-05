@@ -30,11 +30,9 @@ class CategoryItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = CategoryItem
         fields = '__all__'
-        depth = 1
 
 
 class DocDataSerializer(serializers.ModelSerializer):
     class Meta:
         model = DocData
         fields = '__all__'
-        depth = 1
