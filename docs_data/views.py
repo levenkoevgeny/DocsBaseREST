@@ -6,8 +6,8 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from django.conf import settings
 
-from .models import CustomUser, Subdivision, CategoryItem, DocData
-from .serializers import CustomUserSerializer, SubdivisionSerializer, CategoryItemSerializer, DocDataSerializer
+from .models import CustomUser, Region, Subdivision, CategoryItem, DocData
+from .serializers import CustomUserSerializer, RegionSerializer, SubdivisionSerializer, CategoryItemSerializer, DocDataSerializer
 
 from jose import jwt
 
@@ -16,6 +16,11 @@ class CustomUserViewSet(viewsets.ModelViewSet):
     queryset = CustomUser.objects.all()
     serializer_class = CustomUserSerializer
     # permission_classes = [permissions.IsAuthenticated]
+
+
+class RegionViewSet(viewsets.ModelViewSet):
+    queryset = Region.objects.all()
+    serializer_class = RegionSerializer
 
 
 class SubdivisionViewSet(viewsets.ModelViewSet):

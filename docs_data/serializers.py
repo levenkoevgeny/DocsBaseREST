@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import CustomUser, Subdivision, CategoryItem, DocData
+from .models import Region, CustomUser, Subdivision, CategoryItem, DocData
 
 
 class CustomUserSerializer(serializers.ModelSerializer):
@@ -18,6 +18,12 @@ class CustomUserSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         return CustomUser.objects.create_user(**validated_data)
+
+
+class RegionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Region
+        fields = '__all__'
 
 
 class SubdivisionSerializer(serializers.ModelSerializer):

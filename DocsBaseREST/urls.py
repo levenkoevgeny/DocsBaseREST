@@ -13,6 +13,7 @@ from rest_framework_simplejwt.views import (
 from docs_data import views
 
 router = routers.DefaultRouter()
+router.register(r'regions', views.RegionViewSet)
 router.register(r'subdivisions', views.SubdivisionViewSet)
 router.register(r'categories', views.CategoryItemViewSet)
 router.register(r'docs', views.DocDataViewSet)
