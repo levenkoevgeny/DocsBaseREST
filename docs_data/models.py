@@ -60,6 +60,10 @@ class CategoryItem(models.Model):
     date_time_created = models.DateTimeField(verbose_name="Дата и время создания", auto_now_add=True, blank=True,
                                              null=True)
 
+    @property
+    def get_parent(self):
+        return self.parent_category.category_item_name if self.parent_category else "Корневая"
+
     def __str__(self):
         return self.category_item_name
 

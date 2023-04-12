@@ -48,6 +48,7 @@ class SubdivisionViewSet(viewsets.ModelViewSet):
 class CategoryItemViewSet(viewsets.ModelViewSet):
     queryset = CategoryItem.objects.all()
     serializer_class = CategoryItemSerializer
+    filterset_fields = {'category_item_name': ['icontains'], 'parent_category': ['exact', 'isnull']}
     # permission_classes = [permissions.IsAuthenticated]
 
     def destroy(self, *args, **kwargs):

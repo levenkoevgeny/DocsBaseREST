@@ -35,7 +35,7 @@ class SubdivisionSerializer(serializers.ModelSerializer):
 class CategoryItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = CategoryItem
-        fields = '__all__'
+        fields = ['id', 'category_item_name', 'parent_category', 'date_time_created', 'get_parent']
 
 
 class DocDataSerializer(serializers.ModelSerializer):
