@@ -29,7 +29,7 @@ class RegionSerializer(serializers.ModelSerializer):
 class SubdivisionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Subdivision
-        fields = ['subdivision_name', 'date_time_created', 'get_users_count']
+        fields = ['id', 'subdivision_name', 'region', 'get_region_name', 'date_time_created', 'get_users_count']
 
 
 class CategoryItemSerializer(serializers.ModelSerializer):

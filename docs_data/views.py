@@ -17,10 +17,20 @@ class CustomUserViewSet(viewsets.ModelViewSet):
     serializer_class = CustomUserSerializer
     # permission_classes = [permissions.IsAuthenticated]
 
+    def destroy(self, *args, **kwargs):
+        serializer = self.get_serializer(self.get_object())
+        super().destroy(*args, **kwargs)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
 
 class RegionViewSet(viewsets.ModelViewSet):
     queryset = Region.objects.all()
     serializer_class = RegionSerializer
+
+    def destroy(self, *args, **kwargs):
+        serializer = self.get_serializer(self.get_object())
+        super().destroy(*args, **kwargs)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class SubdivisionViewSet(viewsets.ModelViewSet):
@@ -29,17 +39,32 @@ class SubdivisionViewSet(viewsets.ModelViewSet):
     filterset_fields = {'subdivision_name': ['icontains']}
     # permission_classes = [permissions.IsAuthenticated]
 
+    def destroy(self, *args, **kwargs):
+        serializer = self.get_serializer(self.get_object())
+        super().destroy(*args, **kwargs)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
 
 class CategoryItemViewSet(viewsets.ModelViewSet):
     queryset = CategoryItem.objects.all()
     serializer_class = CategoryItemSerializer
     # permission_classes = [permissions.IsAuthenticated]
 
+    def destroy(self, *args, **kwargs):
+        serializer = self.get_serializer(self.get_object())
+        super().destroy(*args, **kwargs)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
 
 class DocDataViewSet(viewsets.ModelViewSet):
     queryset = DocData.objects.all()
     serializer_class = DocDataSerializer
     # permission_classes = [permissions.IsAuthenticated]
+
+    def destroy(self, *args, **kwargs):
+        serializer = self.get_serializer(self.get_object())
+        super().destroy(*args, **kwargs)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 @api_view(['GET'])

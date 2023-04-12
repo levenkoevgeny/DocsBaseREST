@@ -27,11 +27,15 @@ class Subdivision(models.Model):
     def get_users_count(self):
         return self.customuser_set.all().count()
 
+    @property
+    def get_region_name(self):
+        return self.region.region
+
     def __str__(self):
         return self.subdivision_name
 
     class Meta:
-        ordering = ('subdivision_name',)
+        ordering = ('-id',)
         verbose_name = 'Подразделение'
         verbose_name_plural = 'Подразделения'
 
