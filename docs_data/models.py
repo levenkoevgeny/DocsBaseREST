@@ -76,6 +76,7 @@ class CategoryItem(models.Model):
 class DocData(models.Model):
     doc_file = models.FileField(verbose_name="Файл", upload_to='docs')
     category = models.ForeignKey(CategoryItem, on_delete=models.CASCADE, verbose_name="Категория")
+    region = models.ForeignKey(Region, on_delete=models.SET_NULL, blank=True, null=True, verbose_name="Район")
     file_name = models.TextField(verbose_name="Название документа")
     description = models.TextField(verbose_name="Описание документа", blank=True, null=True)
     doc_date = models.DateField(verbose_name="Дата документа", blank=True, null=True)
