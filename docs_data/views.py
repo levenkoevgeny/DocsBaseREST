@@ -60,6 +60,7 @@ class CategoryItemViewSet(viewsets.ModelViewSet):
 class DocDataViewSet(viewsets.ModelViewSet):
     queryset = DocData.objects.all()
     serializer_class = DocDataSerializer
+    filterset_fields = {'file_name': ['icontains'], 'category': ['exact'], 'region': ['exact'], 'user': ['exact']}
     # permission_classes = [permissions.IsAuthenticated]
 
     def destroy(self, *args, **kwargs):
