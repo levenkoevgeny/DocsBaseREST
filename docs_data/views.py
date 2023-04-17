@@ -4,18 +4,32 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
+from rest_framework.decorators import action
 from django.conf import settings
 
 from .models import CustomUser, Region, Subdivision, CategoryItem, DocData
 from .serializers import CustomUserSerializer, RegionSerializer, SubdivisionSerializer, CategoryItemSerializer, DocDataSerializer
-
+from .serializers import ChangePasswordSerializer
 from jose import jwt
 
 
 class CustomUserViewSet(viewsets.ModelViewSet):
     queryset = CustomUser.objects.all()
     serializer_class = CustomUserSerializer
+    filterset_fields = {'username': ['icontains'], 'last_name': ['icontains'], 'subdivision': ['exact'], 'is_superuser': ['exact'], 'is_staff': ['exact'], 'is_active': ['exact']}
     # permission_classes = [permissions.IsAuthenticated]
+
+    @action(detail=True, methods=['post'])
+    def set_password(self, request, pk=None):
+        user = self.get_object()
+        serializer = ChangePasswordSerializer(data=request.data)
+        if serializer.is_valid():
+            user.set_password(serializer.validated_data['password'])
+            user.save()
+            return Response({'status': 'password set'})
+        else:
+            return Response(serializer.errors,
+                            status=status.HTTP_400_BAD_REQUEST)
 
     def destroy(self, *args, **kwargs):
         serializer = self.get_serializer(self.get_object())

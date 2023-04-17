@@ -20,6 +20,10 @@ class CustomUserSerializer(serializers.ModelSerializer):
         return CustomUser.objects.create_user(**validated_data)
 
 
+class ChangePasswordSerializer(serializers.Serializer):
+    password = serializers.CharField(write_only=True, required=True)
+
+
 class RegionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Region
