@@ -17,7 +17,7 @@ class CustomUserViewSet(viewsets.ModelViewSet):
     queryset = CustomUser.objects.all()
     serializer_class = CustomUserSerializer
     filterset_fields = {'username': ['icontains'], 'last_name': ['icontains'], 'subdivision': ['exact'], 'is_superuser': ['exact'], 'is_staff': ['exact'], 'is_active': ['exact']}
-    # permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAdminUser, permissions.IsAuthenticated]
 
     @action(detail=True, methods=['post'])
     def set_password(self, request, pk=None):
@@ -51,7 +51,7 @@ class SubdivisionViewSet(viewsets.ModelViewSet):
     queryset = Subdivision.objects.all()
     serializer_class = SubdivisionSerializer
     filterset_fields = {'subdivision_name': ['icontains']}
-    # permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]
 
     def destroy(self, *args, **kwargs):
         serializer = self.get_serializer(self.get_object())
