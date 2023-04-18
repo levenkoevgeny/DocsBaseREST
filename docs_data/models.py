@@ -45,6 +45,10 @@ class CustomUser(AbstractUser):
     date_time_created = models.DateTimeField(verbose_name="Дата и время создания", auto_now_add=True, blank=True,
                                              null=True)
 
+    @property
+    def get_subdivision(self):
+        return self.subdivision.subdivision_name
+
     def __str__(self):
         return self.username
 
@@ -75,7 +79,8 @@ class CategoryItem(models.Model):
 
 class DocData(models.Model):
     doc_file = models.FileField(verbose_name="Файл", upload_to='docs')
-    category = models.ForeignKey(CategoryItem, on_delete=models.CASCADE, verbose_name="Категория")
+    category = models.ForeignKey(CategoryItem, on_delete=models.SET_NULL, blank=True, null=True,
+                                 verbose_name="Категория")
     region = models.ForeignKey(Region, on_delete=models.SET_NULL, blank=True, null=True, verbose_name="Район")
     file_name = models.TextField(verbose_name="Название документа")
     description = models.TextField(verbose_name="Описание документа", blank=True, null=True)
@@ -83,6 +88,14 @@ class DocData(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, verbose_name="Пользователь (кто добавил документ)")
     date_time_created = models.DateTimeField(verbose_name="Дата и время создания", auto_now_add=True, blank=True,
                                              null=True)
+
+    @property
+    def get_category(self):
+        return self.category.category_item_name if self.category else ""
+
+    @property
+    def get_region(self):
+        return self.region.region if self.region else ""
 
     def __str__(self):
         return self.file_name

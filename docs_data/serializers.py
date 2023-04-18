@@ -10,6 +10,7 @@ class CustomUserSerializer(serializers.ModelSerializer):
                   'is_staff',
                   'first_name',
                   'last_name',
+                  'get_subdivision',
                   'is_active',
                   'subdivision',
                   'date_joined',
@@ -45,4 +46,4 @@ class CategoryItemSerializer(serializers.ModelSerializer):
 class DocDataSerializer(serializers.ModelSerializer):
     class Meta:
         model = DocData
-        fields = '__all__'
+        fields = ['id', 'doc_file', 'category', 'region', 'file_name', 'description', 'doc_date', 'user', 'date_time_created', 'get_category', 'get_region']

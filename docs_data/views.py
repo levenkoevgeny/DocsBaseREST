@@ -40,6 +40,7 @@ class CustomUserViewSet(viewsets.ModelViewSet):
 class RegionViewSet(viewsets.ModelViewSet):
     queryset = Region.objects.all()
     serializer_class = RegionSerializer
+    permission_classes = [permissions.IsAdminUser, permissions.IsAuthenticated]
 
     def destroy(self, *args, **kwargs):
         serializer = self.get_serializer(self.get_object())
@@ -50,7 +51,7 @@ class RegionViewSet(viewsets.ModelViewSet):
 class SubdivisionViewSet(viewsets.ModelViewSet):
     queryset = Subdivision.objects.all()
     serializer_class = SubdivisionSerializer
-    filterset_fields = {'subdivision_name': ['icontains']}
+    filterset_fields = {'subdivision_name': ['icontains'], 'region': ['exact']}
     permission_classes = [permissions.IsAuthenticated]
 
     def destroy(self, *args, **kwargs):
@@ -63,7 +64,7 @@ class CategoryItemViewSet(viewsets.ModelViewSet):
     queryset = CategoryItem.objects.all()
     serializer_class = CategoryItemSerializer
     filterset_fields = {'category_item_name': ['icontains'], 'parent_category': ['exact', 'isnull']}
-    # permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]
 
     def destroy(self, *args, **kwargs):
         serializer = self.get_serializer(self.get_object())
@@ -75,7 +76,7 @@ class DocDataViewSet(viewsets.ModelViewSet):
     queryset = DocData.objects.all()
     serializer_class = DocDataSerializer
     filterset_fields = {'file_name': ['icontains'], 'category': ['exact'], 'region': ['exact'], 'user': ['exact']}
-    # permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]
 
     def destroy(self, *args, **kwargs):
         serializer = self.get_serializer(self.get_object())
