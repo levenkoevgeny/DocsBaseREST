@@ -16,7 +16,9 @@ router = routers.DefaultRouter()
 router.register(r'regions', views.RegionViewSet)
 router.register(r'subdivisions', views.SubdivisionViewSet)
 router.register(r'categories', views.CategoryItemViewSet)
+router.register(r'categories-client', views.CategoryItemViewSetClient)
 router.register(r'docs', views.DocDataViewSet)
+router.register(r'docs-client', views.DocDataViewSetClient)
 router.register(r'users', views.CustomUserViewSet)
 
 urlpatterns = [

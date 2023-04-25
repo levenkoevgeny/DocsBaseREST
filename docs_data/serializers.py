@@ -11,6 +11,7 @@ class CustomUserSerializer(serializers.ModelSerializer):
                   'first_name',
                   'last_name',
                   'get_subdivision',
+                  'get_region',
                   'is_active',
                   'subdivision',
                   'date_joined',

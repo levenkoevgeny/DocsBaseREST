@@ -49,6 +49,10 @@ class CustomUser(AbstractUser):
     def get_subdivision(self):
         return self.subdivision.subdivision_name
 
+    @property
+    def get_region(self):
+        return self.subdivision.region.id
+
     def __str__(self):
         return self.username
 

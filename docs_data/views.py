@@ -17,7 +17,7 @@ class CustomUserViewSet(viewsets.ModelViewSet):
     queryset = CustomUser.objects.all()
     serializer_class = CustomUserSerializer
     filterset_fields = {'username': ['icontains'], 'last_name': ['icontains'], 'subdivision': ['exact'], 'is_superuser': ['exact'], 'is_staff': ['exact'], 'is_active': ['exact']}
-    permission_classes = [permissions.IsAdminUser, permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAdminUser]
 
     @action(detail=True, methods=['post'])
     def set_password(self, request, pk=None):
@@ -40,7 +40,7 @@ class CustomUserViewSet(viewsets.ModelViewSet):
 class RegionViewSet(viewsets.ModelViewSet):
     queryset = Region.objects.all()
     serializer_class = RegionSerializer
-    permission_classes = [permissions.IsAdminUser, permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAdminUser]
 
     def destroy(self, *args, **kwargs):
         serializer = self.get_serializer(self.get_object())
@@ -52,7 +52,7 @@ class SubdivisionViewSet(viewsets.ModelViewSet):
     queryset = Subdivision.objects.all()
     serializer_class = SubdivisionSerializer
     filterset_fields = {'subdivision_name': ['icontains'], 'region': ['exact']}
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAdminUser]
 
     def destroy(self, *args, **kwargs):
         serializer = self.get_serializer(self.get_object())
@@ -64,24 +64,38 @@ class CategoryItemViewSet(viewsets.ModelViewSet):
     queryset = CategoryItem.objects.all()
     serializer_class = CategoryItemSerializer
     filterset_fields = {'category_item_name': ['icontains'], 'parent_category': ['exact', 'isnull']}
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAdminUser]
 
     def destroy(self, *args, **kwargs):
         serializer = self.get_serializer(self.get_object())
         super().destroy(*args, **kwargs)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class CategoryItemViewSetClient(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
+    queryset = CategoryItem.objects.all()
+    serializer_class = CategoryItemSerializer
+    filterset_fields = {'category_item_name': ['icontains'], 'parent_category': ['exact', 'isnull']}
+    permission_classes = [permissions.IsAuthenticated]
 
 
 class DocDataViewSet(viewsets.ModelViewSet):
     queryset = DocData.objects.all()
     serializer_class = DocDataSerializer
     filterset_fields = {'file_name': ['icontains'], 'category': ['exact'], 'region': ['exact'], 'user': ['exact']}
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAdminUser]
 
     def destroy(self, *args, **kwargs):
         serializer = self.get_serializer(self.get_object())
         super().destroy(*args, **kwargs)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class DocDataViewSetClient(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
+    queryset = DocData.objects.all()
+    serializer_class = DocDataSerializer
+    filterset_fields = {'file_name': ['icontains'], 'category': ['exact'], 'region': ['exact'], 'user': ['exact']}
+    permission_classes = [permissions.IsAuthenticated]
 
 
 @api_view(['GET'])
