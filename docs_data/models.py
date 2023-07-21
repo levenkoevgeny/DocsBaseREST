@@ -76,7 +76,7 @@ class CategoryItem(models.Model):
         return self.category_item_name
 
     class Meta:
-        ordering = ('-id',)
+        ordering = ('id',)
         verbose_name = 'Категория'
         verbose_name_plural = 'Категории'
 
