@@ -1,0 +1,3 @@
+https://github.com/levenkoevgeny/DocsBaseREST.git
+
+https://github.com/levenkoevgeny/docs_base_client.git
